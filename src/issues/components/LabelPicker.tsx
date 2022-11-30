@@ -1,4 +1,5 @@
 import { useLabels } from '../hooks/useLabels';
+import { FaSpinner } from 'react-icons/fa';
 
 
 export const LabelPicker = () => {
@@ -6,7 +7,7 @@ export const LabelPicker = () => {
  const {labelsQuery} = useLabels();
 
  if (labelsQuery.isLoading) // isLoading is because is the first time the query is run, isFetching is when the query is running again
-    return <h1>Loading...</h1>
+    return <FaSpinner />;
   return (
     <div>
       {labelsQuery.data?.map((label) => (

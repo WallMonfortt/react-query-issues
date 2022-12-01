@@ -6,7 +6,11 @@ import { sleep } from '../../helpers/sleep';
 
 const getLabels = async():Promise<Label[]> => {
     await sleep(2);
-    const {data} = await githubApi.get<Label[]>('/labels');
+    const {data} = await githubApi.get<Label[]>('/labels',{
+      headers: {
+        Authorization: null
+      }
+    });
     // const response = await fetch('https://api.github.com/repos/facebook/react/labels') // this is the same as the line above
     // const data = await response.json()
     console.log(data)

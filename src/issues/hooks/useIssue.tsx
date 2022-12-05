@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { githubApi } from '../../api/githubApi';
-import { Issue } from '../interfaces/issue';
+import { Issue } from '../interfaces';
 import { sleep } from '../../helpers/sleep';
 
 const getIssueInfo = async (issueNumber: number): Promise<Issue> => {
@@ -17,10 +17,10 @@ export const useIssue = ( issueNumber : number ) => {
         ['issue', issueNumber], // be careful with the key, it must be unique and the type must be the same as the one used in the query
         () => getIssueInfo(issueNumber),
     );
-  return (
-    <div>
-      
-    </div>
-  )
+
+  return {
+        issueQuery
+    }
+  
 }
 

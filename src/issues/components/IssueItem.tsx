@@ -27,7 +27,7 @@ export const IssueItem: FC<Props> = ({ issue }) => {
         queryClient.prefetchQuery(
             ['issue', issue.number, 'comments'],
             () => getIssueComments(issue.number), {
-                staleTime: 1000 * 60 * 10,
+                staleTime: 1000 * 60 * 10, // this is the time that the data will be updated in the cache and the query will be called again
             }
         );
     }
@@ -36,6 +36,9 @@ export const IssueItem: FC<Props> = ({ issue }) => {
         queryClient.setQueryData(
             ['issue', issue.number],
             issue,
+            {
+                updatedAt: new Date().getTime() + 100000, // this is the time that the data will be updated in the cache 
+            }
         );
     }
     console.log(issue);

@@ -12,7 +12,8 @@ export const ListView = () => {
 
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
   const [state, setState] = useState<State>(); // this const will be used to filter the issues by state
-  const { issuesQuery } = useIssues();
+  
+  const { issuesQuery } = useIssues({state, labels: selectedLabels});
 
   const onLabelChanged = ( labelName: string ) => {
     ( selectedLabels.includes( labelName ) )

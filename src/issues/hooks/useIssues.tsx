@@ -2,7 +2,7 @@ import { githubApi } from '../../api/githubApi';
 import { Issue, State } from '../interfaces';
 import { useQuery } from '@tanstack/react-query';
 import { sleep } from '../../helpers/sleep';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 interface Props {
@@ -35,6 +35,11 @@ export const useIssues = ({state, labels} : Props) => {
 
   const [page, setPage] = useState(1);
 
+  useEffect(() => { // reset the page to 1 when the state or labels change
+    setPage(1);
+  }, [state, labels])
+  
+
   const issuesQuery = useQuery(
     ['issues', { state, labels, page }], // key, send an object with the state and labels as a second argument to the query
     () => getIssues( {labels, state, page} ),
@@ -55,7 +60,7 @@ export const useIssues = ({state, labels} : Props) => {
     issuesQuery,
 
     //Getter
-    page,
+    page: issuesQuery.isFetching ? 'Loading...' : page,
 
     // Methods
     nextPage,

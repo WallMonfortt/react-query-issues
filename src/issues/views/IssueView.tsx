@@ -15,8 +15,6 @@ export const IssueView = () => {
   if (!issueQuery.data){
    return(<Navigate to= "./issues/list" />)
   }
-  
-
 
   return (
     <div className="row mb-5">
